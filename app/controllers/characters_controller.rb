@@ -3,7 +3,15 @@ class CharactersController < ApplicationController
 
   # GET /characters or /characters.json
   def index
-    @characters = Character.all
+    query = Character
+            .includes(:species)
+            .includes(person_jobs: { job: :company })
+    if params[:column].present?
+      # @characters = query.order("#{params[:column]}").all
+      @characters = query.order("#{params[:column]} #{params[:direction]}").all
+    else
+      @characters = query.all
+    end
   end
 
   # GET /characters/1 or /characters/1.json
