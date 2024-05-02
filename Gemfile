@@ -63,3 +63,5 @@ group :development do
   # gem "spring"
 end
 
+
+gem "pry-rails", "~> 0.3.9"

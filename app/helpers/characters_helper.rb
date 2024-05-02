@@ -1,9 +1,9 @@
 module CharactersHelper
-  def sort_link(column:, label:)
+  def sort_link(column:, label:, company_filter:)
     direction = column == params[:column] ? future_direction : 'asc'
     link_to(
-      label,
-      characters_path(column: column, direction: direction),
+      "#{label} #{sort_arrow_for(column)}".html_safe,
+      characters_path(column:, direction:, company_filter:),
       data: { turbo_action: 'replace' }
     )
   end
